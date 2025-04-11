@@ -36,10 +36,14 @@ setInterval(function() {
 	},
 	};
 	
-	var mqttClient = mqtt.connect("mqtt://mqtt.eclipseprojects.io",{clientId:"mqttjs041"});
-    mqttClient.on("connect",function(){
-    console.log("connected");
-    });
-    mqttClient.on("error",function(error){
-    console.log("Can't connect"+error);
-    });
+	const mqtt=require('mqtt');
+var client =
+mqtt.connect("mqtt://mqtt.eclipseprojects.io",{clientId:"mqttjs01"});
+client.on("connect",function(){
+console.log("connected");
+});
+client.on("error",function(error){
+console.log("Can't connect"+error);
+});
+
+client.publish("test-topic-handson/data", postData);
