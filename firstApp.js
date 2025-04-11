@@ -35,22 +35,11 @@ setInterval(function() {
 	      'Content-Length': Buffer.byteLength(postData),
 	},
 	};
-
-	const req = http.request(options, (res) => {
-		res.setEncoding('utf8');
-		res.on('data', (chunk) => {
-		  console.log(`BODY: ${chunk}`);
-		});
-		res.on('end', () => {
-		  console.log('No more data in response.');
-		});
-	});
-
-	req.on('error', (e) => {
-		console.error(`problem with request: ${e.message}`);
-	});
-
-	// Write data to request body
-	req.write(postData);
-	req.end();
-}, 2000);
+	
+	var mqttClient = mqtt.connect("mqtt://mqtt.eclipseprojects.io",{clientId:"mqttjs041"});
+    mqttClient.on("connect",function(){
+    console.log("connected");
+    });
+    mqttClient.on("error",function(error){
+    console.log("Can't connect"+error);
+    });
